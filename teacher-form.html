@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Enquiry Form</title>
+    <link rel="stylesheet" href="form.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Teacher Enquiry Form</h2>
+        <form id="teacherForm">
+            <div class="form-group">
+                <label for="teacher_name">Full Name:</label>
+                <input type="text" id="teacher_name" name="teacher_name" required>
+            </div>
+            <div class="form-group">
+                <label for="teacher_email">Email:</label>
+                <input type="email" id="teacher_email" name="teacher_email" required>
+            </div>
+            <div class="form-group">
+                <label for="teacher_phone">Phone Number:</label>
+                <input type="tel" id="teacher_phone" name="teacher_phone" required>
+            </div>
+            <div class="form-group">
+                <label for="teacher_subjects">Subjects You Can Teach:</label>
+                <textarea id="teacher_subjects" name="teacher_subjects" rows="2" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="teacher_experience">Teaching Experience:</label>
+                <textarea id="teacher_experience" name="teacher_experience" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="sub" id="submit">
+            </div>
+        </form>
+    </div>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDvDG3-cHdMNLbbCwkHH6_0tT-Z6XAud4Q",
+            authDomain: "modulustutors.firebaseapp.com",
+            databaseURL: "https://modulustutors-default-rtdb.firebaseio.com",
+            projectId: "modulustutors",
+            storageBucket: "modulustutors.appspot.com",
+            messagingSenderId: "251974553127",
+            appId: "1:251974553127:web:5c8eb1d1858af368efc802"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        document.getElementById('teacherForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const teacherName = document.getElementById('teacher_name').value;
+            const teacherEmail = document.getElementById('teacher_email').value;
+            const teacherPhone = document.getElementById('teacher_phone').value;
+            const teacherSubjects = document.getElementById('teacher_subjects').value;
+            const teacherExperience = document.getElementById('teacher_experience').value;
+
+            set(ref(db, 'teachers/' + teacherName), {
+                name: teacherName,
+                email: teacherEmail,
+                phone: teacherPhone,
+                subjects: teacherSubjects,
+                experience: teacherExperience
+            }).then(() => {
+                alert("Teacher form submitted successfully!");
+                document.getElementById('teacherForm').reset();
+            }).catch((error) => {
+                console.error("Error adding document: ", error);
+            });
+        });
+    </script>
+</body>
+</html>

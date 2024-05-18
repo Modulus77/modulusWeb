@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Enquiry Form</title>
+    <link rel="stylesheet" href="form.css">
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js"></script>
+    <!-- <script src="script.js" defer></script> -->
+</head>
+
+<body>
+    <div class="form-container">
+        <h2>Student Enquiry Form</h2>
+        <form id="studentForm">
+            <div class="form-group">
+                <label for="student_name">Full Name:</label>
+                <input type="text" id="student_name" name="student_name" required>
+            </div>
+            <div class="form-group">
+                <label for="student_email">Email:</label>
+                <input type="email" id="student_email" name="student_email" required>
+            </div>
+            <div class="form-group">
+                <label for="student_phone">Phone Number:</label>
+                <input type="tel" id="student_phone" name="student_phone" required>
+            </div>
+            <div class="form-group">
+                <label for="student_subject">Subject of Interest:</label>
+                <select id="student_subject" name="student_subject" required>
+                    <option value="Math">Math</option>
+                    <option value="Science">Science</option>
+                    <option value="English">English</option>
+                    <option value="SST">SST</option>
+                    <option value="Hindi">Hindi</option>
+                    <option value="Urdu">Urdu</option>
+                    <option value="Commerce">Commerce</option>
+                    <option value="Programming">Any Programming Language | Python, C, Java etc.</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="student_message">Message:</label>
+                <textarea id="student_message" name="student_message" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <!-- <button type="button" onclick="submitStudentForm()">Submit</button> -->
+                <input type="submit" value="submit" class="sub" id="submit">
+            </div>
+        </form>
+        <script type="module">
+            // Import the functions you need from the SDKs you need
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+            import { getDatabase, ref, set, child } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+            const firebaseConfig = {
+                apiKey: "AIzaSyDvDG3-cHdMNLbbCwkHH6_0tT-Z6XAud4Q",
+                authDomain: "modulustutors.firebaseapp.com",
+                databaseURL: "https://modulustutors-default-rtdb.firebaseio.com",
+                projectId: "modulustutors",
+                storageBucket: "modulustutors.appspot.com",
+                messagingSenderId: "251974553127",
+                appId: "1:251974553127:web:5c8eb1d1858af368efc802"
+            };
+
+            const app = initializeApp(firebaseConfig)
+            const db = getDatabase(app)
+
+            document.getElementById("submit").addEventListener('click', function (e) {
+                e.preventDefault();
+                set(ref(db, 'user/' + document.getElementById("student_name").value), {
+                    student_name: document.getElementById("student_name").value,
+                    student_email: document.getElementById("student_email").value,
+                    student_phone: document.getElementById("student_phone").value,
+                    student_subject: document.getElementById("student_subject").value,
+                    student_message: document.getElementById("student_message").value,
+
+
+                });
+                alert("Student form submitted successfully!");
+            })
+        </script>
+    </div>
+</body>
+
+</html>

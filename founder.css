@@ -1,0 +1,121 @@
+/* Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
+/* Variables */
+:root {
+  --font-family: 'Poppins', sans-serif;
+  --first-color: #007bff; /* Blue color for names */
+  --second-color: #333;
+  --bg-color: #f9f9f9;
+  --title-size: 2rem;
+  --subtitle-size: 1.25rem;
+  --normal-size: 1rem;
+  --padding: 60px;
+  --hover-scale: 1.1;
+}
+
+/* Base styles */
+body {
+  font-family: var(--font-family);
+  color: var(--second-color);
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.section {
+  padding: var(--padding) 20px;
+  text-align: center;
+}
+
+.cofounder-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--padding) 20px;
+  background-color: var(--bg-color);
+}
+
+.cofounder-section__heading {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--first-color);
+  margin-bottom: var(--padding);
+}
+
+.cofounder {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--padding);
+  text-align: left;
+  width: 80%;
+  max-width: 1000px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.cofounder__image-container {
+  text-align: center;
+  margin-right: 20px;
+  flex-shrink: 0;
+}
+
+.cofounder__image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.cofounder__image-container:hover .cofounder__image {
+  transform: scale(var(--hover-scale));
+}
+
+.cofounder__name {
+  margin-top: 10px;
+  font-size: var(--subtitle-size);
+  color: var(--first-color);
+}
+
+.cofounder__description {
+  max-width: 600px;
+}
+
+.cofounder__title {
+  font-size: var(--title-size);
+  margin-bottom: 10px;
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+  .cofounder {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cofounder__image-container {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .cofounder__description {
+    text-align: center;
+  }
+}
